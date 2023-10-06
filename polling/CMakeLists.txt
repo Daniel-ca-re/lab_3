@@ -12,7 +12,7 @@ pico_sdk_init()
 # C/C++ project files
 add_executable(polling
     main.c
-    funtions.c
+    functions.c
 )
 
 # pico_stdlib library. You can add more if they are needed
