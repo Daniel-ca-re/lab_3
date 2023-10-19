@@ -28,7 +28,7 @@ void NumberUnits(uint64_t number,uint8_t *numVector){
 /// @param lcdpins pins asosiated to the 7seg
 void PrintNumber(uint8_t number, uint8_t *lcdpins){
     for(int i=0;i<7;i++){
-        if(segmentos[i] & (1ULL <<i))
+        if(segmentos[number] & (1ULL <<i))
             gpio_put(lcdpins[i], 1);
         else
             gpio_put(lcdpins[i], 0);
