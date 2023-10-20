@@ -81,8 +81,3 @@ while True:
         
         risingEdgeCount = 0
         startTime = time.ticks_ms()
-  
-  
-    
-  
-
