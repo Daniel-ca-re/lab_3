@@ -5,7 +5,7 @@
 void main(){
     ///contantes de el display
     uint8_t lcdpins[7]={2,3,4,5,6,7,8};
-    uint8_t lcds[6]={9,10,11,12,13,14};
+    uint8_t lcds[6]={14,13,12,11,10,9};
     uint8_t lcdNumber[6]={0,0,0,0,0,0};
     uint8_t dispEn=0; 
     ///inicializacion de los puetos gpio
