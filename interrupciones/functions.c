@@ -39,12 +39,3 @@ void interrupt_handler() {
     cnt++;
     // Maneja la interrupción por flanco de subida aquí.
 }
-void timer_callback_1s() {
-    // Realiza las acciones necesarias en la interrupción periódica
-    // Por ejemplo, parpadea un LED, toma una muestra, etc.
-}
-
-void timer_callback_5ms() {
-    // Realiza las acciones necesarias en la interrupción periódica
-    // Por ejemplo, parpadea un LED, toma una muestra, etc.
-}

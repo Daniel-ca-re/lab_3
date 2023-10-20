@@ -1,9 +1,15 @@
-#include <stdio.h>
+#pragma once
+
+#include <stdint.h>
+#include <stdbool.h>
 #include "pico/stdlib.h"
 #include "hardware/gpio.h"
 #include "hardware/timer.h"
-void NumberUnits(uint64_t number,uint8_t *numVector);
+#include "pico/time.h"
+#include <pico/stdlib.h>
+#include <pico/time.h>
+
+// Function declarations
+void NumberUnits(uint64_t number, uint8_t *numVector);
 void PrintNumber(uint8_t number, uint8_t *lcdpins);
 void interrupt_handler();
-void timer_callback_1s();
-void timer_callback_5ms();

@@ -46,7 +46,7 @@ void main(){
         ///actializa la frecuancia cada seg
         if(time_us_64()-num_clock>1000000){
             NumberUnits(cnt,lcdNumber);
-            cnt = 1254;
+            cnt = 0;
             num_clock=time_us_64();
         }
     };
