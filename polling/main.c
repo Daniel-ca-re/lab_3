@@ -27,6 +27,7 @@ void main(){
 
     bool state =gpio_get(signal);
     uint64_t cnt = 0;
+    bool enable=false;
 
     while(1){
         ///contador de flancos de subida
@@ -39,7 +40,11 @@ void main(){
         if(time_us_64()-disp_clock>5000){
             gpio_put(lcds[dispEn++], 0);
             dispEn=dispEn%6;
-            PrintNumber(lcdNumber[dispEn], lcdpins);
+            if(dispEn==0)
+                enable=false;
+            if(lcdNumber[dispEn]!=0)
+                enable=true;
+            PrintNumber(lcdNumber[dispEn], lcdpins,enable);
             gpio_put(lcds[dispEn], 1);
             disp_clock=time_us_64();
         }

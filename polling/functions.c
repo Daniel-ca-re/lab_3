@@ -26,11 +26,17 @@ void NumberUnits(uint64_t number,uint8_t *numVector){
 /// @brief this funtions turns on the the leds of a 7seg to reprenset a number
 /// @param number the number D_{2}D_{1}D_{0}
 /// @param lcdpins pins asosiated to the 7seg
-void PrintNumber(uint8_t number, uint8_t *lcdpins){
-    for(int i=0;i<7;i++){
-        if(segmentos[number] & (1ULL <<i))
-            gpio_put(lcdpins[i], 1);
-        else
+void PrintNumber(uint8_t number, uint8_t *lcdpins,bool enable){
+    if(enable){
+        for(int i=0;i<7;i++){
+            if(segmentos[number] & (1ULL <<i))
+                gpio_put(lcdpins[i], 1);
+            else
+                gpio_put(lcdpins[i], 0);
+        }
+    }
+    else{
+        for(int i=0;i<7;i++){
             gpio_put(lcdpins[i], 0);
     }
 }
