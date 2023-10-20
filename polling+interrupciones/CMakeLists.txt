@@ -19,6 +19,7 @@ add_executable(lab04_polling_irq
 target_link_libraries(lab04_polling_irq
     pico_stdlib
     hardware_timer
+    hardware_sync
 )
 
 pico_enable_stdio_usb(lab04_polling_irq 1)
