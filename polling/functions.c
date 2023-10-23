@@ -17,7 +17,7 @@ uint8_t segmentos[10] = {
 /// @param numVector [...,D_{2},D_{1},D_{0}]
 void NumberUnits(uint64_t number,uint8_t *numVector){
     for(int i=0;i<6;i++){
-        numVector[i]=number%10;
+        numVector[-i+6]=number%10;
         number-=numVector[i];
         number/=10;
     }
