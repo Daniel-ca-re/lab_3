@@ -75,9 +75,9 @@ void main(){
         gpio_init(display_pins[i]);
         gpio_set_dir(display_pins[i], GPIO_OUT);
     }
+    
 
-
-    /// Timers
+    // Creación de temporizadores para actualización del display y la frecuencia
     struct repeating_timer timer1;
     add_repeating_timer_ms(3, repeating_timer_callback1, NULL, &timer1);
 
@@ -106,6 +106,7 @@ void main(){
             flag1seg = 0;
         }
 
+        // Modo de espera para ahorrar energía
         __wfi();
 
     };
