@@ -1,15 +1,35 @@
+/**
+ * @file main.c
+ * @brief Programa principal para el control de un display de 7 segmentos y manejo de interrupciones.
+ */
+
 #include "pico/stdlib.h"
 #include "functions.h"
 #include "hardware/sync.h"
 
 #define signal 1
 
+/**
+ * @brief Contador de flancos de subida.
+ */
 uint64_t cnt = 0;
 
+/**
+ * @brief Indicador para actualizar los displays.
+ */
 bool flagdisp = 0;
+
+/**
+ * @brief Indicador para actualizar la frecuencia cada segundo.
+ */
 bool flag1seg = 0;
 
-
+/**
+ * @brief Callback para el temporizador que actualiza los displays.
+ *
+ * @param t Puntero al temporizador.
+ * @return Verdadero para repetir el temporizador.
+ */
 bool repeating_timer_callback1(struct repeating_timer *t) {
 
     flagdisp = 1;
@@ -17,6 +37,12 @@ bool repeating_timer_callback1(struct repeating_timer *t) {
     return true;
 }
 
+/**
+ * @brief Callback para el temporizador que actualiza la frecuencia cada segundo.
+ *
+ * @param t Puntero al temporizador.
+ * @return Verdadero para repetir el temporizador.
+ */
 bool repeating_timer_callback2(struct repeating_timer *t) {
 
     flag1seg = 1;
@@ -26,14 +52,14 @@ bool repeating_timer_callback2(struct repeating_timer *t) {
 
 void main(){
 
-    ///constantes de el display
+    /// Constantes de los display
     uint8_t segment_pins[7] = {12, 11, 19, 20, 21, 10, 22};
     uint8_t display_pins[6] = {16, 17, 18, 15, 14, 13};
     uint8_t frequency_vector[6] = {0, 0, 0, 0, 0, 0};
 
     uint8_t display_on = 0;
 
-    ///inicializacion de los puertos gpio
+    /// Inicialización de los puertos GPIO
     gpio_init(signal);
     gpio_set_dir(signal, GPIO_IN);
     gpio_set_pulls(signal, false, true);
@@ -51,7 +77,7 @@ void main(){
     }
 
 
-    ///timers
+    /// Timers
     struct repeating_timer timer1;
     add_repeating_timer_ms(3, repeating_timer_callback1, NULL, &timer1);
 
@@ -61,7 +87,7 @@ void main(){
 
     while(1){
 
-        ///actualiza los displays
+        /// Actualiza los displays
         if(flagdisp){
 
             gpio_put(display_pins[display_on++], 0);
@@ -72,7 +98,7 @@ void main(){
             flagdisp = 0;
         }
 
-        ///actualiza la frecuencia cada seg
+        /// Actualiza la frecuencia cada segundo
         if(flag1seg){
             NumberUnits(cnt,frequency_vector);
             cnt = 0;
