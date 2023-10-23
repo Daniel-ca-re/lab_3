@@ -21,6 +21,9 @@ void NumberUnits(uint64_t number,uint8_t *numVector);
 void PrintNumber(uint8_t number, uint8_t *lcdpins);
 
 /**
- * @brief Función de manejo de interrupciones.
+ * @brief Manejador de interrupción por flanco de subida.
+ *
+ * Esta función se llama cuando se produce un flanco de subida en la entrada.
+ * Incrementa el contador de flancos de subida.
  */
 void interrupt_handler();
