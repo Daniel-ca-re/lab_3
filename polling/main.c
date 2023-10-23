@@ -1,10 +1,18 @@
+/**
+ * @file main.c
+ * @brief Programa principal que utiliza funciones para controlar un display de 7 segmentos y medir la frecuencia de una señal.
+ */
+
 #include "pico/stdlib.h"
 #include "functions.h"
 
 #define signal 1
 
+/**
+ * @brief Función principal que controla un display de 7 segmentos y mide la frecuencia de una señal de entrada.
+ */
 void main(){
-    ///constantes de el display
+    /// Constantes del display
     uint8_t segment_pins[7] = {12, 11, 19, 20, 21, 10, 22};
     uint8_t display_pins[6] = {16, 17, 18, 15, 14, 13};
     uint8_t frequency_vector[6] = {0, 0, 0, 0, 0, 0};
@@ -12,7 +20,7 @@ void main(){
 
     uint8_t display_on = 0; 
 
-    ///inicializacion de los puertos gpio
+    /// Inicialización de los puertos GPIO
     gpio_init(signal);
     gpio_set_dir(signal, GPIO_IN);
     for(int i=0;i<7;i++){
@@ -26,7 +34,7 @@ void main(){
         gpio_put(display_pins[i],0);
     }
 
-    ///timers
+    /// Timers
     uint64_t disp_clock=time_us_64();
     uint64_t num_clock=time_us_64();
 
@@ -36,14 +44,14 @@ void main(){
 
     while(1){
 
-        ///contador de flancos de subida
+        /// Contador de flancos de subida
         if( state!=gpio_get(signal) ){
             if(state)
                 cnt++;
             state = gpio_get(signal);
         }
 
-        ///actualiza los displays
+        /// Actualiza los displays
         if(time_us_64()-disp_clock>3000){
 
             gpio_put(display_pins[display_on++], 0);
@@ -54,7 +62,7 @@ void main(){
 
         }
 
-        ///actualiza la frecuencia cada seg
+        /// Actualiza la frecuencia cada segundo
         if(time_us_64()-num_clock>1000000){
             NumberUnits(cnt,frequency_vector);
             cnt = 0;
