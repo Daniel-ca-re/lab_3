@@ -1,5 +1,13 @@
+/**
+ * @file functions.c
+ * @brief Implementación de funciones para controlar un display de 7 segmentos.
+ */
+
 #include "functions.h"
 
+/**
+ * @brief Vector de segmentos para representar números en el display de 7 segmentos.
+ */
 uint8_t segmentos[10] = {
     0b00000001,
     0b01001111,
@@ -13,9 +21,6 @@ uint8_t segmentos[10] = {
     0b00000100
 };
 
-/// @brief this funtions takes a numbers a gives his decimal components D_{0}*10^0 + D_{1}*10^1 ... it gives 6
-/// @param number the number D_{2}D_{1}D_{0}
-/// @param numVector [...,D_{2},D_{1},D_{0}]
 void NumberUnits(uint64_t number, uint8_t *numVector){
     for(int i = 5; i >= 0; i--){
         numVector[i]=number%10;
@@ -24,9 +29,7 @@ void NumberUnits(uint64_t number, uint8_t *numVector){
     }
 }
 
-/// @brief this funtions turns on the the leds of a 7seg to represent a number
-/// @param number the number D_{2}D_{1}D_{0}
-/// @param segment_pins pins asosiated to the 7seg
+
 void PrintNumber(uint8_t number, uint8_t *segment_pins){
     for(int i=6;i>=0;i--){
         if(segmentos[number] & (1UL << i))
